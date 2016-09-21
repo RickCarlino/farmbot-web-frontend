@@ -1,6 +1,7 @@
 var open = require('open');
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   module: {
@@ -15,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "..", "dist"),
-    publicPath: "/src/",
+    publicPath: "/dist/",
     filename: "bundle.js"
   },
   ts: {
@@ -24,7 +25,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-    })
+    }), new HtmlWebpackPlugin()
   ],
   resolve: {
     extensions: [
