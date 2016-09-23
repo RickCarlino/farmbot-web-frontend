@@ -29,8 +29,10 @@ export function RegimenItemList({ items, dispatch }: RegimenItemListProps) {
 
 function EmptyList({}) {
   return <div>
-    <p> This regimen doesn't have any items! </p>
-    <p> <i className="fa fa-arrow-left"/>You can add items by using the "bulk scheduler" </p>
+    <p> {__("This regimen doesn't have any items!")} </p>
+    <p> <i className="fa fa-arrow-left"/>
+    {__("You can add items by using the 'bulk scheduler'")}
+    </p>
   </div>;
 }
 
@@ -62,7 +64,7 @@ function RegimenItemDayGroup({ day,
                                items,
                                dispatch }: RegimenItemDayGroupProps) {
     return <div className="regimen-day">
-        <label>Day { day }</label>
+        <label> {__("Day {{daystr}}", {daystr: day })}  </label>
         { items.map(function(item, inx) {
             return <RegimenItemStep item={ item }
                                     key={ inx }

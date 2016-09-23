@@ -29,7 +29,7 @@ export function settingToggleOk(res) {
 }
 
 export function settingToggleErr(err) {
-    error("Refresh browser or restart devices.", "Error while toggling setting");
+    error(__("Refresh browser or restart devices."), __("Error while toggling setting"));
     return {
         type: "SETTING_TOGGLE_ERR",
         payload: {}
@@ -57,7 +57,7 @@ export function pinToggleOk(res) {
 }
 
 export function pinToggleErr(err) {
-    error("Refresh browser or restart devices.", "Error while toggling pin");
+    error(__("Refresh browser or restart devices."), __("Error while toggling pin"));
 }
 
 export function changeStepSize(integer) {
@@ -103,7 +103,7 @@ function commitSettingsChangesOk(resp) {
 }
 
 function commitSettingsChangesErr(err) {
-    error("Unable to commit settings changes.");
+    error(__("Unable to commit settings changes."));
 }
 
 export function commitAxisChanges() {
@@ -156,7 +156,7 @@ function readStatusOk(status) {
 }
 
 function readStatusErr(msg) {
-    error("Did you configure your bot? Is it online?", "Can't read status");
+    error(__("Did you configure your bot? Is it online?"), __("Can't read status"));
     return {
         type: "READ_STATUS_ERR",
         payload: msg

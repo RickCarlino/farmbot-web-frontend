@@ -122,8 +122,8 @@ export let botReducer = generateReducer<BotState>(initialState)
       warning("You need to add a device to your account.",
         "No device found!");
     } else {
-      error("Unable to download device data from server. " +
-        "Check your internet connection.");
+      error(__("Unable to download device data from server.") +
+        __("Check your internet connection."));
     };
     return _.assign<any, BotState>({},
       state, {
@@ -135,10 +135,10 @@ export let botReducer = generateReducer<BotState>(initialState)
       case 422:
         let errors = _.map(action.payload.responseJSON, v => v)
           .join(". ");
-        error(errors, "Couldn\'t save device.");
+        error(errors, __("Couldn\'t save device."));
         break;
       default:
-        error("Error while saving device.");
+        error(__("Error while saving device."));
         break;
     }
     return state;

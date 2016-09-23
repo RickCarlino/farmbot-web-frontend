@@ -45,7 +45,7 @@ export function fetchSequences() {
       .then(({data}) => {
         dispatch(fetchSequencesOk(data));
       }, (e: Error) => {
-        error("Could not download sequences");
+        error(__("Could not download sequences"));
         dispatch(fetchSequencesNo(e));
       });
   };
@@ -198,7 +198,7 @@ export function deleteSequence(index: number) {
       if (response && response.data.sequence ) {
         error(response.data.sequence);
       } else {
-        error("Unable to delete sequence");
+        error(__("Unable to delete sequence"));
       }
     }
 

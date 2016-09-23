@@ -8,7 +8,7 @@ interface AddRegimenProps {
 export function AddRegimen({dispatch}: AddRegimenProps) {
   return <button className="green button-like widget-control"
                  onClick={ add(dispatch) }>
-    Add
+    {__("Add")}
   </button>;
 }
 

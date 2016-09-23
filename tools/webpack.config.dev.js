@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var I18nPlugin = require("i18n-webpack-plugin");
+var I18nPlugin = require("i18next-webpack-plugin");
 var generateConfig = require("./webpack.config.base");
 
 

@@ -34,7 +34,7 @@ function SequenceSelectBox({dispatch,
         if (seq.id) {
             return <option value={ seq.id.toString() } key={ seq.id } > { seq.name } </option>;
         } else {
-            throw new Error("Sequence must have ID.")
+            throw new Error("Sequence must have ID.");
         }
     };
 
@@ -87,7 +87,7 @@ export function ExecuteBlock({dispatch, step, index, sequence, sequences}: StepP
                     <div className="step-content execute-step">
                         <div className="row">
                             <div className="col-xs-12">
-                                <label>Sequence</label>
+                                <label> {__("Sequence")} </label>
                                 <SequenceSelectBox dispatch={dispatch}
                                     step={step}
                                     sequence={sequence}

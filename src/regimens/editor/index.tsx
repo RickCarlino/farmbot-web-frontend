@@ -31,13 +31,17 @@ export function RegimenEditorWidget({regimens, dispatch, auth}: RegimenEditorWid
           <div className="widget-header">
             <h5>Regimen Editor</h5>
             <i className="fa fa-question-circle widget-help-icon">
-              <div className="widget-help-text">Regimens allow FarmBot
+              <div className="widget-help-text">
+              {__(`
+                Regimens allow FarmBot
                 to take care of a plant throughout its entire life. A
                 regimen consists of many sequences that are scheduled to run
                 based on the age of the plant. Regimens are applied to
                 plants from the farm designer and can be re-used on many
                 plants growing at the same or different times. Multiple
-                regimens can be applied to any one plant. Coming soon: Regimens!</div>
+                regimens can be applied to any one plant. Coming soon: Regimens!
+                `)}
+              </div>
             </i>
           </div>
         </div>

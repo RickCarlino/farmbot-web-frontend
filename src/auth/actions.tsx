@@ -68,7 +68,7 @@ export function login(username: string,
 }
 
 function loginErr(err: AuthResponse ) {
-  error("Login failed.");
+  error(__("Login failed."));
   return {
     type: "LOGIN_ERR",
     payload: err

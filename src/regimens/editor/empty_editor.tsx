@@ -7,6 +7,8 @@ interface EmptyEditorProps {
     actually edit). */
 export function EmptyEditor({}: EmptyEditorProps) {
     return <div>
-        <p> Please click "Add" to start editing a regimen. </p>
+        <p>
+        {__("Please click 'Add' to start editing a regimen.")}
+        </p>
     </div>;
 }

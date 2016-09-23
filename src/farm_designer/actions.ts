@@ -16,7 +16,7 @@ export function fetchPlants(baseUrl: string): Thunk {
         dispatch({ type: "FETCH_PLANTS_OK", payload });
       })
       .catch((payload) => {
-        error("Tried to download plants, but couldn't.");
+        error(__("Tried to download plants, but couldn't."));
         dispatch({ type: "FETCH_PLANTS_ERR", payload });
       });
 
@@ -34,7 +34,7 @@ export function savePlant(plant: Plant, baseUrl: string): Thunk {
         dispatch({ type: "SAVE_PLANT_OK", payload });
       })
       .catch((payload) => {
-        error("Tried to save plant, but couldn't.");
+        error(__("Tried to save plant, but couldn't."));
         dispatch({ type: "SAVE_PLANT_ERR", payload });
       });
   };
@@ -50,7 +50,7 @@ export function destroyPlant(plant: Plant, baseUrl: string): Thunk {
         dispatch({ type: "DESTROY_PLANT_OK", payload });
       })
       .catch((payload) => {
-        error("Tried to delete plant, but couldn't.");
+        error(__("Tried to delete plant, but couldn't."));
         dispatch({ type: "DESTROY_PLANT_ERR", payload });
       });
   };
