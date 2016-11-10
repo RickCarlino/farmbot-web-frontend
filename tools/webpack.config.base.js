@@ -14,14 +14,14 @@ module.exports = function() {
     return {
         module: {
             loaders: [{
-                test: /\.tsx?$/,
-                exclude: /(node_modules)/,
-                loader: 'ts'
-            },
-            {
-                test: /\.hbs$/,
-                loader: 'handlebars-loader'
-            }
+                    test: /\.tsx?$/,
+                    exclude: /(node_modules)/,
+                    loader: 'ts'
+                },
+                {
+                    test: /\.hbs$/,
+                    loader: 'handlebars-loader'
+                }
             ],
         },
         entry: {
@@ -59,8 +59,11 @@ module.exports = function() {
         },
         devServer: {
             historyApiFallback: {
-                index: '/app/index.html'
-            }
+                index: '/index.html',
+                rewrites: [
+                    { from: /\/app/, to: '/app/index.html' }
+                ]
+            },
         }
     };
 };

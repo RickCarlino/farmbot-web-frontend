@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { AuthState } from "./interfaces";
+import { AuthState, User } from "./interfaces";
 import { generateReducer } from "../redux/generate_reducer";
 
 const initialState: AuthState = {
@@ -17,6 +17,10 @@ const initialState: AuthState = {
 };
 
 export let authReducer = generateReducer<AuthState>(initialState)
+  .add<User>("UPDATE_USER_SUCCESS", function (s, a) {
+    s.user = a.payload;
+    return s;
+  })
   .add<AuthState>("LOGOUT", function (s, a) {
     return initialState;
   })

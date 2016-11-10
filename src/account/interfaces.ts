@@ -5,4 +5,6 @@ export interface UserAccountUpdate {
     password?: string;
     new_password?: string;
     new_password_confirmation?: string;
+    /** User must enter password confirmation to delete their account. */
+    deletion_confirmation?: string;
 }

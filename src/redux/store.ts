@@ -30,5 +30,10 @@ export let store = configureStore();
 /** Tries to fetch previous state from `sessionStorage`.
  * Returns {} if nothing is found. Used mostly for hot reloading. */
 function maybeFetchOldState() {
-    return JSON.parse(sessionStorage["lastState"] || "{}");
+    try {
+        return JSON.parse(sessionStorage["lastState"] || "{}");
+    } catch (e) {
+        return {};
+    }
+
 }

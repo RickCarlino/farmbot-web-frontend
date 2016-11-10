@@ -5,6 +5,9 @@ interface BIProps {
     onCommit: Function;
     type?: "text" | "number" | "email" | "password";
     name?: string;
+    /** Allow the user to empty out the form control. If unset, form control
+     * will reset itself to previous value. */
+    allowEmpty?: boolean;
 }
 
 interface BIState {
@@ -19,7 +22,10 @@ export class BlurableInput extends React.Component<BIProps, BIState> {
     }
 
     maybeCommit(e: React.SyntheticEvent<HTMLInputElement>) {
-        if (this.state.buffer) { this.props.onCommit(e); }
+        let shouldCommit = (
+            this.state.buffer || (this.props.allowEmpty && _.isString(""))
+        );
+        if (shouldCommit) { this.props.onCommit(e); }
         this.setState({ isEditing: false, buffer: "" });
     }
 

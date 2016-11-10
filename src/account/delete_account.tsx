@@ -3,7 +3,9 @@ import { t } from "i18next";
 import { BlurableInput } from "../blurable_input";
 
 interface DeleteAccountPropTypes {
-    set: (event: React.FormEvent<HTMLInputElement>) => void;
+    deletion_confirmation: string | undefined;
+    set: React.EventHandler<React.FormEvent<HTMLInputElement>>;
+    save: React.EventHandler<React.MouseEvent<HTMLButtonElement>>;
 }
 
 export class DeleteAccount extends React.Component<DeleteAccountPropTypes, {}> {
@@ -52,12 +54,13 @@ export class DeleteAccount extends React.Component<DeleteAccountPropTypes, {}> {
                                             <div className="col-sm-9">
                                                 <BlurableInput
                                                     onCommit={set}
-                                                    name="email"
-                                                    value=""
-                                                    type="password"
-                                                    />
+                                                    name="deletion_confirmation"
+                                                    allowEmpty={true}
+                                                    value={this.props.deletion_confirmation || ""}
+                                                    type="password" />
                                             </div>
-                                            <button className="red button-like widget-control"
+                                            <button onClick={this.props.save}
+                                                className="red button-like widget-control"
                                                 type="button">DELETE ACCOUNT</button>
                                         </div>
                                     </div>

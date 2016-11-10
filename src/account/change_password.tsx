@@ -3,6 +3,9 @@ import { t } from "i18next";
 import { BlurableInput } from "../blurable_input";
 
 interface ChangePasswordPropTypes {
+    password: string | undefined;
+    new_password: string | undefined;
+    new_password_confirmation: string | undefined;
     set: React.EventHandler<React.FormEvent<HTMLInputElement>>;
     save: React.EventHandler<React.MouseEvent<HTMLButtonElement>>;
 }
@@ -16,7 +19,8 @@ export class ChangePassword extends React.Component<ChangePasswordPropTypes, {}>
                     <div className="widget-wrapper">
                         <div className="row">
                             <div className="col-sm-12">
-                                <button className="green button-like widget-control"
+                                <button onClick={this.props.save}
+                                    className="green button-like widget-control"
                                     type="button">{t("SAVE")}</button>
                                 <div className="widget-header">
                                     <h5>{t("Change Password")}</h5>
@@ -33,9 +37,12 @@ export class ChangePassword extends React.Component<ChangePasswordPropTypes, {}>
                                             </label>
                                             <div className="col-sm-9">
                                                 <BlurableInput
+                                                    allowEmpty={true}
                                                     onCommit={set}
                                                     name="password"
-                                                    value=""
+                                                    value={
+                                                        this.props.password || ""
+                                                    }
                                                     type="password"
                                                     />
                                             </div>
@@ -46,9 +53,12 @@ export class ChangePassword extends React.Component<ChangePasswordPropTypes, {}>
                                             </label>
                                             <div className="col-sm-9">
                                                 <BlurableInput
+                                                    allowEmpty={true}
                                                     onCommit={set}
                                                     name="new_password"
-                                                    value=""
+                                                    value={
+                                                        this.props.new_password || ""
+                                                    }
                                                     type="password"
                                                     />
                                             </div>
@@ -59,9 +69,12 @@ export class ChangePassword extends React.Component<ChangePasswordPropTypes, {}>
                                             </label>
                                             <div className="col-sm-9">
                                                 <BlurableInput
+                                                    allowEmpty={true}
                                                     onCommit={set}
                                                     name="new_password_confirmation"
-                                                    value=""
+                                                    value={
+                                                        this.props.new_password_confirmation || ""
+                                                    }
                                                     type="password"
                                                     />
                                             </div>

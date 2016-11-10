@@ -4,7 +4,7 @@ import { API } from "../api";
 
 /** Determines the most appropriate API port based on a number of environment
  *  factors such as hostname and protocol (HTTP vs. HTTPS). */
-function determinePort(): string {
+export function inferPort(): string {
   // Most devs running a server on localhost run the API on port 3000.
   if (location.hostname === "localhost") { return "3000"; }
   if (API.parseURL(location.origin).protocol === "https:") { return "443"; }
@@ -16,7 +16,7 @@ let initialState: ConfigState = {
   host: location.hostname,
   // It gets annoying to manually change the port # in dev mode.
   // I automatically point to port 3000 on local.
-  port: determinePort()
+  port: API.inferPort()
 };
 
 export let configReducer = generateReducer<ConfigState>(initialState)
