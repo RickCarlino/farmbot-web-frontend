@@ -17,6 +17,7 @@ export interface RestResources {
 let initialState: RestResources = {
   sequences: { all: [], byId: {} },
   regimens: { all: [], byId: {} }
+  /** Tells the ui when the sync object has completed. */
 }
 
 /** Responsible for all RESTful resources. */
@@ -30,4 +31,4 @@ export let resourceReducer = generateReducer<RestResources>(initialState)
     }
 
     return state;
-  })
+  });

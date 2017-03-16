@@ -1,6 +1,6 @@
 import * as React from "react";
 import { selectSequence, addSequence } from "./actions";
-import { Sequence, SequencesListProps } from "./interfaces";
+import { Sequence, SequencesListProps, EditorProps } from "./interfaces";
 import { t } from "i18next";
 import { connect } from "react-redux";
 import { Everything } from "../interfaces";
@@ -34,10 +34,10 @@ let buttonList = (dispatch: Function) => (seq: Sequence, index: number) => {
   }
 };
 
-@connect((state: Everything) => state)
-export class SequencesList extends React.Component<SequencesListProps, {}> {
+export class SequencesList extends React.Component<EditorProps, {}> {
   render() {
-    let { sequences, dispatch } = this.props;
+    let { dispatch } = this.props;
+    let sequences = this.props.all;
     return <Widget className="sequence-list-widget">
       <WidgetHeader title="Sequences"
         helpText={`Here is the list of all of your sequences.
@@ -50,7 +50,7 @@ export class SequencesList extends React.Component<SequencesListProps, {}> {
       <WidgetBody>
         <Row>
           <Col xs={12}>
-            {sequences.all.map(buttonList(dispatch))}
+            {sequences.map(buttonList(dispatch))}
           </Col>
         </Row>
       </WidgetBody>

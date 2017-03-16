@@ -1,12 +1,11 @@
 import * as React from "react";
 import { SequenceBodyItem } from "farmbot";
-import { Sequence, dispatcher, DataXferObj } from "./interfaces";
+import { Sequence, dispatcher, DataXferObj, EditorProps } from "./interfaces";
 import { execSequence } from "../devices/actions";
 import {
   editCurrentSequence, saveSequence, deleteSequence, nullSequence
 } from "./actions";
 import { stepTiles, StepTile } from "./step_tiles/index";
-import { Everything } from "../interfaces";
 import { ColorPicker } from "./color_picker";
 import { t } from "i18next";
 import {
@@ -22,8 +21,6 @@ import { stepGet } from "../draggable/actions";
 import { pushStep, spliceStep, moveStep, removeStep } from "./actions";
 import { StepDragger, NULL_DRAGGER_ID } from "../draggable/step_dragger";
 import { copySequence } from "./actions";
-import { ToolsState } from "../tools/interfaces";
-import { connect } from "react-redux";
 
 let Oops: StepTile = (_) => {
   return <div>{t("Whoops! Not a valid message_type")}</div>;
@@ -49,16 +46,10 @@ let onDrop = (dispatch: dispatcher, dropperId: number) => (key: string) => {
   routeIncomingDroppedItems(dispatch, key, dropperId);
 };
 
-let StepList = ({ sequence, sequences, dispatch, tools }:
-  {
-    sequence: Sequence,
-    sequences: Sequence[],
-    dispatch: Function,
-    tools: ToolsState
-  }) => {
+let StepList = ({ current, all, dispatch, tools }: EditorProps) => {
 
   return <div>
-    {(sequence.body || []).map((step: SequenceBodyItem, inx, arr) => {
+    {(current.body || []).map((step: SequenceBodyItem, inx, arr) => {
       let Step = stepTiles[step.kind] || Oops;
       /** HACK: If we wrote `key={inx}` for this iterator, React's diff
        * algorithm would lose track of which step has changed (and
@@ -78,8 +69,8 @@ let StepList = ({ sequence, sequences, dispatch, tools }:
           <Step step={step}
             index={inx}
             dispatch={dispatch}
-            sequence={sequence}
-            all={sequences}
+            sequence={current}
+            all={all}
             current={arr[inx]}
             tools={tools} />
         </StepDragger>
@@ -118,12 +109,11 @@ export let performSeq = (dispatch: Function, s: Sequence) => {
   };
 };
 
-@connect((state: Everything) => state)
-export class SequenceEditorMiddle extends React.Component<Everything, {}> {
+export class SequenceEditorMiddle extends React.Component<EditorProps, {}> {
   render() {
-    let { sequences, dispatch, tools } = this.props;
-    let inx = sequences.current;
-    let sequence: Sequence = sequences.all[inx] || nullSequence();
+    let { current, dispatch, tools } = this.props;
+    let sequence = current;
+
     let fixThisToo = function (key: string) {
       let xfer = dispatch(stepGet(key)) as DataXferObj;
       if (xfer.draggerId === NULL_DRAGGER_ID) {
@@ -155,7 +145,7 @@ export class SequenceEditorMiddle extends React.Component<Everything, {}> {
           {t("Save & Run")}
         </button>
         <button className="red button-like"
-          onClick={destroy(dispatch, sequence, inx)}>
+          onClick={destroy(dispatch, sequence, sequence.id || 0)}>
           {t("Delete")}
         </button>
         <button className="yellow button-like"
@@ -176,10 +166,10 @@ export class SequenceEditorMiddle extends React.Component<Everything, {}> {
               ));
             }} />
         </Row>
-        {<StepList sequence={sequence}
+        <StepList current={current}
           dispatch={dispatch}
-          sequences={sequences.all}
-          tools={tools} />}
+          all={this.props.all}
+          tools={tools} />
         <Row>
           <Col xs={12}>
             <DropArea isLocked={true}

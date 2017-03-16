@@ -12,6 +12,7 @@ import {
 import { ToolsState } from "../tools/interfaces";
 import { DropDownItem } from "../ui/index";
 import { IStepInput } from "./step_tiles/index";
+import { Tool } from "../tools/interfaces"
 import { StepMoveDataXfer, StepSpliceDataXfer } from "../draggable/interfaces";
 
 export type CHANNEL_NAME = "toast" | "ticker";
@@ -47,10 +48,8 @@ export interface NamedVector3 extends Vector3 {
   name: string;
 }
 
-export interface MobileSequencesNavProps extends Everything {
-  params: {
-    sequence: string;
-  };
+export interface MobileSequencesNavProps {
+  sequenceName: string;
 }
 
 /** Used when dispatching ADD_CHANNEL / REMOVE_CHANNEL actions. */
@@ -230,3 +229,10 @@ export interface SequenceApiResponse {
 export type DataXferObj = StepMoveDataXfer | StepSpliceDataXfer;
 
 export type dispatcher = (a: Function | { type: string }) => DataXferObj;
+
+export interface EditorProps {
+  current: Sequence
+  all: Sequence[];
+  dispatch: Function;
+  tools: Tool[];
+}

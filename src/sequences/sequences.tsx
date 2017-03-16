@@ -7,20 +7,24 @@ import { connect } from "react-redux";
 import { Everything } from "../interfaces";
 import { isMobile } from "../util";
 import { Page, Col } from "../ui/index";
+import { EditorProps } from "./interfaces";
+import { mapStateToProps } from "./map_state_to_props";
 
-@connect((state: Everything) => state)
-export class Sequences extends React.Component<any, Everything> {
+@connect(mapStateToProps)
+export class Sequences extends React.Component<EditorProps, {}> {
+  maybeRenderMobile = () => {
+    return isMobile() && <MobileSequencesNav
+      sequenceName={this.props.current.name} />;
+  }
   render() {
     return <Page className="sequences">
       <Col xs={4} md={3}>
-        <StepButtonCluster { ...this.props } />
+        <StepButtonCluster dispatch={this.props.dispatch} />
       </Col>
       <Col xs={8} md={6}>
         <SequenceEditorMiddle { ...this.props } />
       </Col>
-      {isMobile() && (
-        <MobileSequencesNav { ...this.props} />
-      )}
+      {this.maybeRenderMobile()}
       <Col xs={12} md={3}>
         <SequencesList { ...this.props } />
       </Col>
