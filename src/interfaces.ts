@@ -106,7 +106,7 @@ export interface Sync {
   points: Point[];
 }
 
-/** React-select does not provide an interface for their CustomOption 
+/** React-select does not provide an interface for their CustomOption
  * component. Since they share similarities, we can go with this one as a base.
  */
 export interface CustomOptionProps {
