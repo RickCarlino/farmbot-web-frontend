@@ -17,6 +17,7 @@ import {
 import { combineReducers } from "redux";
 import { ReduxAction } from "./interfaces";
 import { Session } from "../session";
+import { resourceReducer as resources } from "../resource_reducer"
 
 let reducers = combineReducers({
   auth,
@@ -29,6 +30,7 @@ let reducers = combineReducers({
   draggable,
   peripherals,
   tools,
+  resources,
   sync
 });
 
@@ -38,8 +40,6 @@ export function rootReducer(
   /** Sorry for the `any` here. */
   state: {} | any,
   action: ReduxAction<{}>) {
-  if (action.type === "LOGOUT") {
-    Session.clear(true);
-  }
+  if (action.type === "LOGOUT") { Session.clear(true); }
   return reducers(state, action);
 };
