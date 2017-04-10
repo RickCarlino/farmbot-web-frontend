@@ -13,21 +13,11 @@ export function warning(message: string, title = "Warning", color = "yellow") {
 
 // Errors can fire multiple times for situations such as password guessing
 export function error(message: string, title = "Error", color = "red") {
-  if (lastMsg === message) {
-    return;
-  } else {
-    createToast(message, title, color);
-  }
-  lastMsg = message;
+  createToast(message, title, color);
 }
 
 export function success(message: string, title = "Success", color = "green") {
-  if (lastMsg === message) {
-    return;
-  } else {
-    createToast(message, title, color);
-  }
-  lastMsg = message;
+  createToast(message, title, color);
 }
 
 export function info(message: string, title = "FYI", color = "blue") {
@@ -41,12 +31,7 @@ export function info(message: string, title = "FYI", color = "blue") {
 
 export function fun(message: string, title = "Did you know?",
   color = "dark-blue") {
-  if (lastMsg === message) {
-    return;
-  } else {
-    createToast(message, title, color);
-  }
-  lastMsg = message;
+  createToast(message, title, color);
 }
 
 let createToast = (message: string, title: string, color: string) => {
