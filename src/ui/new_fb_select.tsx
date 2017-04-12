@@ -64,7 +64,7 @@ export class NewFBSelect extends React.Component<Props, Partial<State>> {
     let placeholder = this.props.placeholder || "Search...";
     return <div className="select" onClick={this.toggleDropdown}>
       <div className="select-search-container">
-        <input type="text" placeholder={placeholder} value={this.item.label} />
+        <input type="text" readOnly={true} placeholder={placeholder} value={this.item.label} />
       </div>
       <div
         className={"select-results-container is-open-" + !!isOpen}>

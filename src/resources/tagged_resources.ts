@@ -94,7 +94,6 @@ export function isTaggedResource(x: object): x is TaggedResource {
 let is = (r: ResourceName) => function isOfTag(x: object) {
   let safe = (sanityCheck(x) && isTaggedResource(x) && x.kind == r);
   if (!safe) {
-    console.warn("RUNTIME TYPE CHECK OF " + r + " failed!");
     if (x) {
       throw new Error("Possible bad index");
     }

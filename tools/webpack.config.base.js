@@ -35,8 +35,6 @@ module.exports = function () {
     /** Allows imports without file extensions. */
     resolve: {
       alias: {
-        'react': 'react-lite',
-        'react-dom': 'react-lite'
       },
       extensions: [".js", ".ts", ".tsx", ".css", ".scss", ".json", ".hbs"]
     },

@@ -3,7 +3,8 @@ import {
   defensiveClone,
   getParam,
   betterCompact,
-  safeStringFetch
+  safeStringFetch,
+  oneOf
 } from "../util";
 describe("util", () => {
   describe("safeStringFetch", () => {
@@ -88,4 +89,16 @@ describe("util", () => {
       expect(result).toEqual("Email: can't be blank.");
     });
   });
+
+  describe("oneOf()", () => {
+    it("determines matches", () => {
+      expect(oneOf(["foo"], "foobar")).toBeTruthy();
+      expect(oneOf(["foo", "baz"], "foo bar baz")).toBeTruthy();
+    });
+
+    it("determines non-matches", () => {
+      expect(oneOf(["foo"], "QMMADSDASDASD")).toBeFalsy();
+      expect(oneOf(["foo", "baz"], "nothing to see here.")).toBeFalsy();
+    })
+  })
 });

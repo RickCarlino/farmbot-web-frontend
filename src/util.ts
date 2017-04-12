@@ -61,8 +61,7 @@ function safelyFetchErrors(err: AxiosErrorResponse): Dictionary<string> {
   if (err && err.response && err.response.data) {
     return err.response.data;
   } else {
-    console.warn("DONT KNOW HOW TO HANDLE THIS ERROR MESSAGE.");
-    console.dir(err);
+    console.warn("Last error message wasn't formatted like an API error.");
     return { problem: "Farmbot Web App hit an unhandled exception." };
   };
 }
@@ -285,4 +284,11 @@ export function sortResourcesById<T extends TaggedResource>(input: T[]): T[] {
 /** Light wrapper around _.merge() to prevent common type errors / mistakes. */
 export function betterMerge<T>(target: T, update: (T | Partial<T>)): T {
   return _.merge({}, target, update);
+}
+
+/** Determine if a string contains one of multiple values. */
+export function oneOf(list: string[], target: string) {
+  let matches = 0;
+  list.map(x => target.includes(x) ? matches++ : "");
+  return !!matches;
 }

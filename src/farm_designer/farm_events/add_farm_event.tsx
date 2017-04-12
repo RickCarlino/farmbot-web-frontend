@@ -49,8 +49,6 @@ export class AddFarmEvent extends React.Component<AddEditFarmEventProps, State> 
       })
       this.props.dispatch(action);
       this.setState({ uuid: action.payload.uuid });
-    } else {
-      console.log("Dissuade user from creating a farm event.")
     }
   }
   /** No executables. Can't load form. */

@@ -1,0 +1,9 @@
+languages:
+  - javascript
+  - typescript
+  - jsx
+  - css
+files:
+  - "src/**/*"
+exclude:
+  - "coverage/**/*"

@@ -30,8 +30,6 @@ function select(dispatch: Function, regimen: TaggedRegimen) {
   return function (event: React.MouseEvent<{}>) {
     if (regimen && isTaggedRegimen(regimen)) {
       dispatch(selectRegimen(regimen));
-    } else {
-      console.warn("No regimen ??")
     }
   };
 }

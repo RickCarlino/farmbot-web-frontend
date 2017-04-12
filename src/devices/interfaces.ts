@@ -103,6 +103,7 @@ export type Xyz = "x" | "y" | "z";
 export type Axis = Xyz | "all";
 
 export interface CalibrationButtonProps {
+  disabled: boolean;
   axis: Axis;
 }
 

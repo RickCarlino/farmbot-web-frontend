@@ -92,9 +92,9 @@ export class ImageFlipper extends React.Component<ImageFlipperProps, Partial<Ima
   metaDatas() {
     let i = this.current();
     if (i) {
-      let { meta, id } = i.body;
+      let { meta } = i.body;
       return Object.keys(meta).sort().map(function (key, index) {
-        return <MetaInfo key={id} attr={key} obj={meta} />;
+        return <MetaInfo key={index} attr={key} obj={meta} />;
       });
     } else {
       return <MetaInfo attr={"image"} obj={{ image: "No meta data." }} />;

@@ -315,7 +315,6 @@ export let findFarmEventById = (ri: ResourceIndex, fe_id: number) => {
     return fe;
   } else {
     let e = new Error(`Bad farm_event id: ${fe_id}`);
-    console.dir(e)
     throw e;
   }
 };

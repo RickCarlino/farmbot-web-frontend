@@ -12,7 +12,7 @@ import {
   BotState
 } from "../devices/interfaces";
 import { t } from "i18next";
-import { McuParams, Configuration, BotStateTree } from "farmbot";
+import { McuParams, Configuration, BotStateTree, ALLOWED_PACKAGES } from "farmbot";
 import { Sequence } from "../sequences/interfaces";
 import * as _ from "lodash";
 import { HardwareState } from "../devices/interfaces";
@@ -23,12 +23,17 @@ import { init, edit } from "../api/crud";
 import { getDeviceAccountSettings } from "../resources/selectors";
 import { TaggedDevice } from "../resources/tagged_resources";
 import { versionOK } from "./reducer";
+import { oneOf } from "../util";
 
 const ON = 1, OFF = 0;
 type configKey = keyof McuParams;
 
 function incomingStatus(statusMessage: HardwareState) {
   return { type: "BOT_CHANGE", payload: statusMessage };
+}
+
+function isLog(x: any): x is Log {
+  return _.isObject(x) && _.isString(x.message);
 }
 
 export function updateConfig(config: Configuration) {
@@ -197,16 +202,31 @@ export function changeDevice(device: TaggedDevice,
   update: Partial<DeviceAccountSettings>) {
   return edit(device, update);
 }
+export function botIsOnline() {
+  return !(devices && devices.current && devices.current.client);
+}
+export function MCUFactoryReset(pkg: ALLOWED_PACKAGES = "arduino_firmware") {
+  const noun = "MCU Factory Reset";
+  return devices
+    .current
+    .factoryReset(pkg)
+    .then(commandOK(noun), commandErr(noun));
+}
 
+export function botConfigChange(key: configKey, value: number) {
+  const noun = "Setting toggle";
+  return devices
+    .current
+    .updateMcu({ [key]: value })
+    .then(commandOK(noun), commandErr(noun));
+};
 
 export function settingToggle(name: configKey, bot: BotState) {
-  // TODO : This should be an atomic operation handled at the bot level
-  // as a lower level command.
   const noun = "Setting toggle";
   return devices
     .current
     .updateMcu({
-      [name]: ((bot.hardware.mcu_params as any)[name] === 0) ? ON : OFF
+      [name]: ((bot.hardware.mcu_params)[name] === 0) ? ON : OFF
     })
     .then(commandOK(noun), commandErr(noun));
 };
@@ -257,19 +277,27 @@ function readStatus() {
 }
 
 let NEED_VERSION_CHECK = true;
-
+// Already filtering messages in FarmBot OS and the API- this is just for
+// an additional layer of safety. If sensitive data ever hits a client, it will
+// be reported to ROllbar for investigation.
+const BAD_WORDS = ["WPA", "PSK", "PASSWORD", "NERVES"];
 export function connectDevice(token: string): {} | ((dispatch: Function) => any) {
   return (dispatch: Function, getState: GetState) => {
     let bot = new Farmbot({ token });
     return bot
       .connect()
       .then(() => {
+        devices.online = true;
         devices.current = bot;
         (window as any)["current_bot"] = bot;
         bot.setUserEnv({ "LAST_CLIENT_CONNECTED": JSON.stringify(new Date()) });
         readStatus();
         bot.on("logs", function (msg: Log) {
-          dispatch(init({ kind: "logs", uuid: "MUST_CHANGE", body: msg }));
+          if (isLog(msg) && !oneOf(BAD_WORDS, msg.message.toUpperCase())) {
+            dispatch(init({ kind: "logs", uuid: "MUST_CHANGE", body: msg }));
+          } else {
+            throw new Error("Refusing to display log: " + JSON.stringify(msg));
+          }
         });
         bot.on("status", function (msg: BotStateTree) {
           dispatch(incomingStatus(msg));

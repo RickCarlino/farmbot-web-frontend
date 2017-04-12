@@ -28,6 +28,7 @@ export class ConfigInputBox extends React.Component<ConfigInputBoxProps, {}> {
   }
 
   render() {
+
     return <td>
       <input type="text"
         style={this.style()}

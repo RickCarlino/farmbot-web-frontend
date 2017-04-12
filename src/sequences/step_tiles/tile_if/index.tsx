@@ -156,7 +156,6 @@ export let IfBlockDropDownHandler = (props: IfParams,
   }
 
   function overwriteStep(input: Execute | Nothing) {
-    console.log("OVERWRITING WITH " + input.kind);
     let update = defensiveClone(step);
     let nextSequence = defensiveClone(sequence).body;
     update.args[key] = input;

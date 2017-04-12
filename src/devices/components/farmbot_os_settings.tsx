@@ -175,12 +175,12 @@ export class FarmbotOsSettings extends React.Component<FarmbotOsProps,
               <label>{t("CAMERA")}</label>
             </Col>
             <Col xs={7}>
-              <p>
+              <div>
                 <DeprecatedFBSelect allowEmpty={true}
                   list={CAMERA_CHOICES}
                   placeholder="Select a camera..."
                   onChange={this.sendOffConfig} />
-              </p>
+              </div>
             </Col>
             <Col xs={3}>
               {this.state.cameraStatus}

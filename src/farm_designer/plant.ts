@@ -8,7 +8,6 @@ let TEMP_ICON_MAP: { [ofSlug: string]: string } = {
 /** @deprecated
  * Factory function for Plant types. */
 export function Plant(options: PlantOptions): Plant {
-  console.warn("REFACTOR THIS OUT. USE TAGGED RESOURCES.");
   let openfarm_slug = options.openfarm_slug || "not-set";
   return {
     id: options.id,

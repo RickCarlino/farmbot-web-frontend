@@ -173,11 +173,11 @@ export class DeprecatedFBSelect extends React.Component<Readonly<SelectProps>, P
     return <div className={"select " + (className || "")}>
       <div className="select-search-container">
         <input type="text"
-          onChange={this.updateInput}
+          onChange={this.updateInput || _.noop}
           onFocus={this.open}
           onBlur={this.maybeClose}
           placeholder={placeholder || "Search..."}
-          value={this.value().label}
+          value={this.value().label || ""}
           id={this.props.id || ""} />
       </div>
       <div className={"select-results-container is-open-" + !!isOpen}>

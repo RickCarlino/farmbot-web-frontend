@@ -7,6 +7,10 @@ import { mapStateToProps } from "./state_to_props";
 
 @connect(mapStateToProps)
 export class Tools extends React.Component<Props, Partial<ToolsState>> {
+  constructor() {
+    super();
+    this.state = {};
+  }
 
   toggleBays = () => { this.setState({ editingBays: !this.state.editingBays }); }
   toggleTools = () => { this.setState({ editingTools: !this.state.editingTools }); }

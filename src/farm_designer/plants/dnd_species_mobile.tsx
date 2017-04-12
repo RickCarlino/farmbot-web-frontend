@@ -13,7 +13,7 @@ import {
 } from "../interfaces";
 
 const NOOP = (a: object, b: number, c: number) => {
-  console.log("NO DND SUPPORT ON THIS BROWSER");
+  // "NO DND SUPPORT ON THIS BROWSER";
 };
 
 @connect((state: Everything) => state)
