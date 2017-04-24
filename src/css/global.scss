@@ -277,12 +277,10 @@ ul {
 }
 
 .coming-soon {
-    background-color: $gray;
-    opacity: 0.30;
+    opacity: 0.50;
     position: relative;
     width: 100%;
     height: 100%;
-    pointer-events: none;
 }
 
 .coming-soon:after {
@@ -290,7 +288,7 @@ ul {
     background-color: $red;
     width: 100%;
     position: absolute;
-    top: 50%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     vertical-align: middle;
