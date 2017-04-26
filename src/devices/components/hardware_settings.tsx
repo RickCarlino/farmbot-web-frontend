@@ -165,21 +165,29 @@ export class HardwareSettings extends React.Component<HardwareSettingsProps, {}>
                 dispatch={dispatch}
                 bot={bot} />
               <BooleanMCUInputGroup name={t("INVERT ENCODERS")}
-                tooltip={t(`(Alpha) Invert the encoders.`)}
+                tooltip={t(`(Alpha) Reverse the direction of encoder position
+                        reading. FarmBot OS version 3.1.4 or later required.`)}
                 x={"encoder_inverted_x"}
                 y={"encoder_inverted_y"}
                 z={"encoder_inverted_z"}
                 dispatch={dispatch}
                 bot={bot} />
               <NumericMCUInputGroup name={t("Max missed steps")}
-                tooltip={t(`(Alpha) maximum missed steps for encoders`)}
+                tooltip={t(`(Alpha) Number of steps missed (determined by
+                        encoder) before motor is considered to have stalled.`)}
                 x={"encoder_missed_steps_max_x"}
                 y={"encoder_missed_steps_max_y"}
                 z={"encoder_missed_steps_max_z"}
                 bot={bot}
                 dispatch={dispatch} />
+              {/*
+              <EncoderType hardware={mcu_params}
+                onChange={(x, y) => { botConfigChange(x, y) }} />
+              */}
               <NumericMCUInputGroup name={t("ENCODER SCALING")}
-                tooltip={t(`(Alpha) Position = encoder_steps * scale_factor / 100.`)}
+                tooltip={t(`(Alpha) encoder scaling factor =
+                        100 * (motor resolution * microsteps)
+                        / (encoder resolution * 4)`)}
                 x={"encoder_scaling_x"}
                 y={"encoder_scaling_y"}
                 z={"encoder_scaling_z"}
