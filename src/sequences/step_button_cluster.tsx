@@ -15,6 +15,18 @@ export function StepButtonCluster({ dispatch, current }: StepButtonProps) {
     <StepButton dispatch={dispatch}
       current={current}
       step={{
+        kind: "loop",
+        args: {
+          sequence_id: 0
+        },
+        body: []
+      }}
+      color="gray">
+      {t("LOOP")}
+    </StepButton>,
+    <StepButton dispatch={dispatch}
+      current={current}
+      step={{
         kind: "move_absolute",
         args: {
           location: {
