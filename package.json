@@ -46,7 +46,7 @@
     "css-loader": "^0.25.0",
     "enzyme": "^2.8.1",
     "extract-text-webpack-plugin": "^2.0.0-beta.5",
-    "farmbot": "3.6.0",
+    "farmbot": "file:../farmbot-js",
     "fastclick": "^1.0.6",
     "file-loader": "^0.10.0",
     "handlebars": "^4.0.5",
