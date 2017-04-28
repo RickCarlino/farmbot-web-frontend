@@ -17,6 +17,7 @@ import * as _ from "lodash";
 import { CeleryNode, LegalSequenceKind, LegalArgString, If, Execute, Nothing } from "farmbot";
 import { TaggedSequence } from "../../resources/tagged_resources";
 import { overwrite } from "../../api/crud";
+import { LoopBlock } from "./tile_loop";
 
 interface MoveParams {
   step: Step;
@@ -105,6 +106,7 @@ function numericNonsense(val: string, copy: CeleryNode, field: LegalArgString) {
 export function renderCeleryNode(kind: LegalSequenceKind, props: StepParams) {
   switch (props.currentStep.kind) {
     case "execute": return <ExecuteBlock {...props} />;
+    case "loop": return <LoopBlock {...props} />;
     case "_if": return <TileIf {...props} />;
     case "move_relative": return <TileMoveRelative {...props} />;
     case "move_absolute": return <TileMoveAbsolute {...props} />;
